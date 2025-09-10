@@ -5,6 +5,10 @@
  */
 package tp6_ejercicio1_grupo9;
 
+import java.util.HashSet;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Usuario
@@ -14,8 +18,12 @@ public class panel_tp6_e1 extends javax.swing.JFrame {
     /**
      * Creates new form panel
      */
+    private DefaultTableModel modelo = new DefaultTableModel();
+    public static HashSet<Producto> listaProductos = new HashSet<>();
     public panel_tp6_e1() {
         initComponents();
+        cargarCombo();
+        armarColumna();
     }
 
     /**
@@ -27,46 +35,50 @@ public class panel_tp6_e1 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDesktopPane1 = new javax.swing.JDesktopPane();
+        escritorio = new javax.swing.JDesktopPane();
         jPanel1 = new javax.swing.JPanel();
-        CbCatalogo = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        btnAgregar = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
+        jcbCategoria = new javax.swing.JComboBox<>();
+        jlCategoria = new javax.swing.JLabel();
+        jlNombre = new javax.swing.JLabel();
+        jlPrecio = new javax.swing.JLabel();
+        jbAgregar = new javax.swing.JButton();
+        jtfNombre = new javax.swing.JTextField();
+        jtfPrecio = new javax.swing.JTextField();
+        jlTitulo = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jDesktopPane1.setBackground(java.awt.SystemColor.control);
-        jDesktopPane1.setForeground(java.awt.SystemColor.control);
+        escritorio.setBackground(java.awt.SystemColor.control);
+        escritorio.setForeground(java.awt.SystemColor.control);
 
         jPanel1.setBackground(java.awt.SystemColor.activeCaptionBorder);
         jPanel1.setForeground(new java.awt.Color(0, 0, 0));
 
-        CbCatalogo.setBackground(java.awt.SystemColor.controlHighlight);
-        CbCatalogo.setForeground(java.awt.SystemColor.control);
-        CbCatalogo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbCategoria.setBackground(java.awt.SystemColor.controlHighlight);
+        jcbCategoria.setForeground(java.awt.SystemColor.control);
 
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("Categoria:");
+        jlCategoria.setForeground(new java.awt.Color(0, 0, 0));
+        jlCategoria.setText("Categoria:");
 
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("Nombre:");
+        jlNombre.setForeground(new java.awt.Color(0, 0, 0));
+        jlNombre.setText("Nombre:");
 
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel3.setText("Precio ($):");
+        jlPrecio.setForeground(new java.awt.Color(0, 0, 0));
+        jlPrecio.setText("Precio ($):");
 
-        btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tp6_ejercicio1_grupo9/icons8-carrito-de-compras-48.png"))); // NOI18N
-        btnAgregar.setText("Agregar");
+        jbAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tp6_ejercicio1_grupo9/icons8-carrito-de-compras-48.png"))); // NOI18N
+        jbAgregar.setText("Agregar");
+        jbAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAgregarActionPerformed(evt);
+            }
+        });
 
-        jTextField1.setBackground(java.awt.SystemColor.control);
+        jtfNombre.setBackground(java.awt.SystemColor.control);
 
-        jTextField2.setBackground(java.awt.SystemColor.control);
+        jtfPrecio.setBackground(java.awt.SystemColor.control);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -76,20 +88,20 @@ public class panel_tp6_e1 extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addComponent(jlCategoria)
                         .addGap(33, 33, 33)
-                        .addComponent(CbCatalogo, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jcbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
+                            .addComponent(jlNombre)
+                            .addComponent(jlPrecio))
                         .addGap(30, 30, 30)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1)
-                            .addComponent(jTextField2))
+                            .addComponent(jtfNombre)
+                            .addComponent(jtfPrecio))
                         .addGap(20, 20, 20)
-                        .addComponent(btnAgregar)
+                        .addComponent(jbAgregar)
                         .addGap(31, 31, 31))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -97,30 +109,30 @@ public class panel_tp6_e1 extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CbCatalogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addComponent(jcbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlCategoria))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jlNombre)
+                            .addComponent(jtfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jlPrecio)
+                            .addComponent(jtfPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jbAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
 
-        jLabel4.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tp6_ejercicio1_grupo9/icons8-producto-50.png"))); // NOI18N
-        jLabel4.setText("Gestion de productos");
+        jlTitulo.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jlTitulo.setForeground(new java.awt.Color(0, 0, 0));
+        jlTitulo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tp6_ejercicio1_grupo9/icons8-producto-50.png"))); // NOI18N
+        jlTitulo.setText("Gestion de productos");
 
-        jTable1.setBackground(java.awt.SystemColor.activeCaptionBorder);
-        jTable1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTable.setBackground(java.awt.SystemColor.activeCaptionBorder);
+        jTable.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -131,33 +143,33 @@ public class panel_tp6_e1 extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTable);
 
-        jDesktopPane1.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jLabel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorio.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorio.setLayer(jlTitulo, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorio.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
-        jDesktopPane1.setLayout(jDesktopPane1Layout);
-        jDesktopPane1Layout.setHorizontalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+        javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
+        escritorio.setLayout(escritorioLayout);
+        escritorioLayout.setHorizontalGroup(
+            escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(escritorioLayout.createSequentialGroup()
+                .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(escritorioLayout.createSequentialGroup()
                         .addGap(14, 14, 14)
-                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE)
                             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                    .addGroup(escritorioLayout.createSequentialGroup()
                         .addGap(24, 24, 24)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jlTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jDesktopPane1Layout.setVerticalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+        escritorioLayout.setVerticalGroup(
+            escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(escritorioLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jlTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -171,18 +183,32 @@ public class panel_tp6_e1 extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jDesktopPane1)
+                .addComponent(escritorio)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(escritorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jbAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarActionPerformed
+        double precio = Double.parseDouble(jtfPrecio.getText());
+        Categoria cat = (Categoria) jcbCategoria.getSelectedItem();
+        
+        Producto productoN = new Producto(jtfNombre.getText(), precio, cat);
+        if(listaProductos.contains(productoN)) {
+            JOptionPane.showMessageDialog(this, "El producto ya existe");
+        }else{
+            listaProductos.add(productoN);
+            JOptionPane.showMessageDialog(this, "Producto agregado");
+                modelo.addRow(new Object[]{jtfNombre.getText(), cat, precio});
+        }
+    }//GEN-LAST:event_jbAgregarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -219,19 +245,30 @@ public class panel_tp6_e1 extends javax.swing.JFrame {
             }
         });
     }
-
+    private void cargarCombo(){
+        for(Categoria aux : Categoria.values()){
+            jcbCategoria.addItem(aux);
+        }
+    }
+    
+    private void armarColumna(){
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Categoria");
+        modelo.addColumn("Precio");
+        jTable.setModel(modelo);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> CbCatalogo;
-    private javax.swing.JButton btnAgregar;
-    private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JDesktopPane escritorio;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTable jTable;
+    private javax.swing.JButton jbAgregar;
+    private javax.swing.JComboBox<Categoria> jcbCategoria;
+    private javax.swing.JLabel jlCategoria;
+    private javax.swing.JLabel jlNombre;
+    private javax.swing.JLabel jlPrecio;
+    private javax.swing.JLabel jlTitulo;
+    private javax.swing.JTextField jtfNombre;
+    private javax.swing.JTextField jtfPrecio;
     // End of variables declaration//GEN-END:variables
 }

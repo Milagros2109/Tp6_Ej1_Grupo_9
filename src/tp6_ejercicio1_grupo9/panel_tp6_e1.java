@@ -197,6 +197,11 @@ public class panel_tp6_e1 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarActionPerformed
+        try{
+            if(jtfNombre.getText().trim().isEmpty() || jtfPrecio.getText().trim().isEmpty()){
+                JOptionPane.showMessageDialog(this, "Los campos no pueden estar vacios");
+            }
+     
         double precio = Double.parseDouble(jtfPrecio.getText());
         Categoria cat = (Categoria) jcbCategoria.getSelectedItem();
         
@@ -207,6 +212,9 @@ public class panel_tp6_e1 extends javax.swing.JFrame {
             listaProductos.add(productoN);
             JOptionPane.showMessageDialog(this, "Producto agregado");
                 modelo.addRow(new Object[]{jtfNombre.getText(), cat, precio});
+        }
+        }catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(this, "El precio debe ser un número");
         }
     }//GEN-LAST:event_jbAgregarActionPerformed
 

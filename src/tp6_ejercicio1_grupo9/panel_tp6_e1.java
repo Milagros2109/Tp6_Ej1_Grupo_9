@@ -5,8 +5,14 @@
  */
 package tp6_ejercicio1_grupo9;
 
+import java.awt.Component;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.HashSet;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -20,10 +26,40 @@ public class panel_tp6_e1 extends javax.swing.JFrame {
      */
     private DefaultTableModel modelo = new DefaultTableModel();
     public static HashSet<Producto> listaProductos = new HashSet<>();
+    
     public panel_tp6_e1() {
         initComponents();
         cargarCombo();
         armarColumna();
+        jtfNombre.setEnabled(false);
+        jtfPrecio.setEnabled(false);
+        jbAgregar.setEnabled(false);
+        
+        JOptionPane.showMessageDialog(this, "Por favor seleccione una categoría antes de ingresar datos.", "Información", JOptionPane.INFORMATION_MESSAGE);
+        
+        jcbCategoria.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent ie) {
+                Categoria seleccion = (Categoria) jcbCategoria.getSelectedItem();
+                boolean habilitar = seleccion != null;
+                jtfNombre.setEnabled(habilitar);
+                jtfPrecio.setEnabled(habilitar);
+                jbAgregar.setEnabled(habilitar);
+            }
+        });
+        
+    }
+    
+    public void limpiarCampos(JPanel panel) {
+        for (Component c : panel.getComponents()) {
+            if (c instanceof JTextField) {
+                JTextField caja = (JTextField) c;
+                caja.setText("");
+            } else if (c instanceof JComboBox) {
+                JComboBox combo = (JComboBox) c;
+                combo.setSelectedItem(null);
+            }
+        }
     }
 
     /**
@@ -49,6 +85,7 @@ public class panel_tp6_e1 extends javax.swing.JFrame {
         jTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         escritorio.setBackground(java.awt.SystemColor.control);
         escritorio.setForeground(java.awt.SystemColor.control);
@@ -58,6 +95,11 @@ public class panel_tp6_e1 extends javax.swing.JFrame {
 
         jcbCategoria.setBackground(java.awt.SystemColor.controlHighlight);
         jcbCategoria.setForeground(java.awt.SystemColor.control);
+        jcbCategoria.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcbCategoriaItemStateChanged(evt);
+            }
+        });
 
         jlCategoria.setForeground(new java.awt.Color(0, 0, 0));
         jlCategoria.setText("Categoria:");
@@ -194,29 +236,45 @@ public class panel_tp6_e1 extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarActionPerformed
-        try{
-            if(jtfNombre.getText().trim().isEmpty() || jtfPrecio.getText().trim().isEmpty()){
-                JOptionPane.showMessageDialog(this, "Los campos no pueden estar vacios");
+        try {
+            if (jtfNombre.getText().trim().isEmpty() || jtfPrecio.getText().trim().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Los campos no pueden estar vacios", "Campos incompletos", JOptionPane.WARNING_MESSAGE);
+                return;
             }
-     
-        double precio = Double.parseDouble(jtfPrecio.getText());
-        Categoria cat = (Categoria) jcbCategoria.getSelectedItem();
-        
-        Producto productoN = new Producto(jtfNombre.getText(), precio, cat);
-        if(listaProductos.contains(productoN)) {
-            JOptionPane.showMessageDialog(this, "El producto ya existe");
-        }else{
-            listaProductos.add(productoN);
-            JOptionPane.showMessageDialog(this, "Producto agregado");
+            
+            Categoria cat = (Categoria) jcbCategoria.getSelectedItem();
+            if (cat == null) {
+                JOptionPane.showMessageDialog(this, "Debe seleccionar una categoría", "Error", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            double precio = Double.parseDouble(jtfPrecio.getText());
+            if (precio <= 0) {
+                JOptionPane.showMessageDialog(this, "El precio debe ser mayor a 0", "Inválido", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            Producto productoN = new Producto(jtfNombre.getText(), precio, cat);
+            if (listaProductos.contains(productoN)) {
+                JOptionPane.showMessageDialog(this, "El producto ya existe", "Inválido", JOptionPane.ERROR_MESSAGE);
+            } else {
+                listaProductos.add(productoN);
+                JOptionPane.showMessageDialog(this, "Producto agregado", "Válido", JOptionPane.INFORMATION_MESSAGE);
                 modelo.addRow(new Object[]{jtfNombre.getText(), cat, precio});
-        }
-        }catch(NumberFormatException e){
-            JOptionPane.showMessageDialog(this, "El precio debe ser un número");
+                limpiarCampos(jPanel1);
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "El precio debe ser un número", "Error de entrada", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_jbAgregarActionPerformed
+
+    private void jcbCategoriaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbCategoriaItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcbCategoriaItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -253,13 +311,19 @@ public class panel_tp6_e1 extends javax.swing.JFrame {
             }
         });
     }
-    private void cargarCombo(){
-        for(Categoria aux : Categoria.values()){
+    
+    private void cargarCombo() {
+        jcbCategoria.removeAll();
+        jcbCategoria.addItem(null);
+        
+        for (Categoria aux : Categoria.values()) {
             jcbCategoria.addItem(aux);
         }
+        
+        jcbCategoria.setSelectedIndex(0);
     }
     
-    private void armarColumna(){
+    private void armarColumna() {
         modelo.addColumn("Nombre");
         modelo.addColumn("Categoria");
         modelo.addColumn("Precio");

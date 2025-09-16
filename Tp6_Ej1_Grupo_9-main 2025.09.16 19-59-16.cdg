@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="Tp6_Ej1_Grupo_9-main">
+  <ClassDiagramComponents>
+    <Class name="panel_tp6_e1" package="tp6_ejercicio1_grupo9" visibility="public" xPosition="-20.0" yPosition="254.0">
+      <Fields>
+        <Field name="modelo" type="DefaultTableModel" visibility="private"/>
+        <Field name="listaProductos" type="HashSet&lt;Producto&gt;" visibility="public" isStatic="true"/>
+        <Field name="escritorio" type="javax.swing.JDesktopPane" visibility="private"/>
+        <Field name="jPanel1" type="javax.swing.JPanel" visibility="private"/>
+        <Field name="jScrollPane1" type="javax.swing.JScrollPane" visibility="private"/>
+        <Field name="jTable" type="javax.swing.JTable" visibility="private"/>
+        <Field name="jbAgregar" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jcbCategoria" type="javax.swing.JComboBox&lt;Categoria&gt;" visibility="private"/>
+        <Field name="jlCategoria" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jlNombre" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jlPrecio" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jlTitulo" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jtfNombre" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="jtfPrecio" type="javax.swing.JTextField" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="limpiarCampos" returnType="void" visibility="public">
+          <Argument type="JPanel" name="panel"/>
+        </Method>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
+        <Method name="jbAgregarActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jcbCategoriaItemStateChanged" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ItemEvent" name="evt"/>
+        </Method>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="args"/>
+        </Method>
+        <Method name="cargarCombo" returnType="void" visibility="private"/>
+        <Method name="armarColumna" returnType="void" visibility="private"/>
+      </Methods>
+    </Class>
+    <Class name="Producto" package="tp6_ejercicio1_grupo9" visibility="public" xPosition="697.0" yPosition="5.0">
+      <Fields>
+        <Field name="nombre" type="String" visibility="private"/>
+        <Field name="precio" type="double" visibility="private"/>
+        <Field name="categoria" type="Categoria" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="nombre"/>
+          <Argument type="double" name="precio"/>
+          <Argument type="Categoria" name="categoria"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getNombre" returnType="String" visibility="public"/>
+        <Method name="setNombre" returnType="void" visibility="public">
+          <Argument type="String" name="nombre"/>
+        </Method>
+        <Method name="getPrecio" returnType="double" visibility="public"/>
+        <Method name="setPrecio" returnType="void" visibility="public">
+          <Argument type="double" name="precio"/>
+        </Method>
+        <Method name="getCategoria" returnType="Categoria" visibility="public"/>
+        <Method name="setCategoria" returnType="void" visibility="public">
+          <Argument type="Categoria" name="categoria"/>
+        </Method>
+        <Method name="hashCode" returnType="int" visibility="public"/>
+        <Method name="equals" returnType="boolean" visibility="public">
+          <Argument type="Object" name="obj"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Enum name="Categoria" package="tp6_ejercicio1_grupo9" visibility="public" xPosition="20.0" yPosition="20.0">
+      <Literals>
+        <Literal name="ELECTRONICA"/>
+        <Literal name="ROPA"/>
+        <Literal name="ALIMENTO"/>
+      </Literals>
+    </Enum>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <HasRelation name="listaProductos" source="tp6_ejercicio1_grupo9.panel_tp6_e1" target="tp6_ejercicio1_grupo9.Producto" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="HashSet&lt;Producto&gt;"/>
+    <HasRelation name="categoria" source="tp6_ejercicio1_grupo9.Producto" target="tp6_ejercicio1_grupo9.Categoria" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="jcbCategoria" source="tp6_ejercicio1_grupo9.panel_tp6_e1" target="tp6_ejercicio1_grupo9.Categoria" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="tp6_ejercicio1_grupo9.Producto" target="tp6_ejercicio1_grupo9.Categoria" sourceCardinality="1..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>
